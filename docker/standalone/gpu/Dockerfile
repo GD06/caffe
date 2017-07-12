@@ -18,10 +18,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libprotobuf-dev \
         libsnappy-dev \
         protobuf-compiler \
-        python-dev \
-        python-numpy \
-        python-pip \
-        python-scipy && \
+        python3-dev \
+        python3-numpy \
+        python3-pip \
+        python3-scipy && \
     rm -rf /var/lib/apt/lists/*
 
 ENV CAFFE_ROOT=/opt/caffe
@@ -32,7 +32,7 @@ ENV CLONE_TAG=framewark
 
 #RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/BVLC/caffe.git . && \
 RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/GD06/caffe.git . && \
-    for req in $(cat python/requirements.txt) pydot; do pip install $req; done && \
+    for req in $(cat python/requirements.txt) pydot; do pip3 install $req; done && \
     mkdir build && cd build && \
     cmake -DUSE_CUDNN=1 .. && \
     make -j"$(nproc)"
